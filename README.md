@@ -2,7 +2,7 @@
 
 > Meu repositório “caderno de guerra” de estudos: **Data Engineering + Machine Learning**, tudo na prática, com organização, desafios e projetos reais.
 
-🎯 **Objetivo:** evoluir do Python “pra dados” até fundamentos sólidos de ML/Engenharia de ML, criando um histórico consistente de aprendizado (e um portfólio que faz sentido pra recrutador).
+🎯 **Objetivo:** evoluir do Python “pra dados” até fundamentos sólidos de ML/Engenharia de ML, criando um histórico consistente de aprendizado.
 
 ---
 

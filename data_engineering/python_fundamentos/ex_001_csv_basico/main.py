@@ -4,7 +4,7 @@ import csv
 rows_ok = []
 invalid_count = 0
 
-with open('data_engineering/python_fundamentos/ex_001_cav_basico/data/vendas.csv', mode='r') as file:
+with open('data_engineering/python_fundamentos/ex_001_csv_basico/data/vendas.csv', mode='r') as file:
     csvFile = csv.DictReader(file)
 
     for line in csvFile:

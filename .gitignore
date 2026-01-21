@@ -1,20 +1,27 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
-*.egg-info/
-dist/
-build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
 
-# Envs
+# envs
 .venv/
 venv/
+ENV/
 .env
+.env.*
 
-# Jupyter
-.ipynb_checkpoints/
-
-# OS / Editor
-.vscode/
+# OS/IDE
 .DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Data outputs
+projects/mini_lake/data/**
+!projects/mini_lake/data/.gitkeep

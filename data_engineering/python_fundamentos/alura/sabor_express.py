@@ -1,6 +1,8 @@
 import os
 
-restaurantes = []
+restaurantes = [{"nome": "Praça", "categoria": "Comida Caseira", 'ativo': False},
+                {"nome": "Pizzaria do Zé", "categoria": "Pizza", 'ativo': False},
+                {"nome": "Sushi Place", "categoria": "Comida Japonesa", 'ativo': False}]
 
 def limpar_tela() -> None:
     os.system("cls" if os.name == "nt" else "clear")
@@ -39,7 +41,9 @@ def escolher_opcao() -> int:
 def cadastrar_restaurante() -> None:
     print("Cadastrando restaurante...")
     nome_do_restaurante = input("Digite o nome do restaurante que deseja cadastrar: ")
-    restaurantes.append(nome_do_restaurante)
+    categoria_restaurante = input(f"Digite a categoria do {nome_do_restaurante}: ")
+    dados_do_restaurante = {"nome": nome_do_restaurante, "categoria": categoria_restaurante}
+    restaurantes.append(dados_do_restaurante)
     print(f"Restaurante '{nome_do_restaurante}' cadastrado com sucesso!")
     input("Pressione ENTER para voltar o menu principal...")
     main()
@@ -50,12 +54,24 @@ def listar_restaurantes() -> None:
         print("Nenhum restaurante cadastrado.")
     else:
         for idx, restaurante in enumerate(restaurantes, start=1):
-            print(f"{idx}. {restaurante}")
+            print(f"{idx}. {restaurante['nome'].ljust(20)} | {restaurante['categoria'].ljust(15)} | {'Ativo' if restaurante.get('ativo', False) else 'Inativo'}")
     input("\nPressione ENTER para voltar o menu principal...")
     main()
 
-def ativar_restaurante() -> None:
-    print("Ativando restaurante...")
+def alternar_estado_restaurante() -> None:
+    print("Alternando estado do restaurante...")
+    nome_restaurante = input("Digite o nome do restaurante que deseja ativar/desativar: ")
+    restaurante_encontrado = False
+    
+    for restaurante in restaurantes:
+        if nome_restaurante == restaurante["nome"].lower():
+            restaurante_encontrado = True
+            restaurante['ativo'] = not restaurante.get('ativo', False)
+            estado = "ativado" if restaurante['ativo'] else "desativado"
+            print(f"Restaurante '{nome_restaurante}' foi {estado}.")
+            break
+    if not restaurante_encontrado:
+        print(f"Restaurante '{nome_restaurante}' não encontrado.")
     pausar()
 
 def main() -> None:
@@ -71,7 +87,7 @@ def main() -> None:
         elif opcao == 2:
             listar_restaurantes()
         elif opcao == 3:
-            ativar_restaurante()
+            alternar_estado_restaurante()
         elif opcao == 4:
             finalizar_app()
             break

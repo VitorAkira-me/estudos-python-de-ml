@@ -1,5 +1,7 @@
 import os
 
+restaurantes = []
+
 def limpar_tela() -> None:
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -25,6 +27,7 @@ def pausar() -> None:
 def finalizar_app() -> None:
     limpar_tela()
     print("Finalizando aplicação... Até mais!")
+    return
 
 def escolher_opcao() -> int:
     while True:
@@ -34,15 +37,25 @@ def escolher_opcao() -> int:
             print("Entrada inválida. Digite um número (1 a 4).")
 
 def cadastrar_restaurante() -> None:
-    print("Cadastrando restaurante... (placeholder)")
-    pausar()
+    print("Cadastrando restaurante...")
+    nome_do_restaurante = input("Digite o nome do restaurante que deseja cadastrar: ")
+    restaurantes.append(nome_do_restaurante)
+    print(f"Restaurante '{nome_do_restaurante}' cadastrado com sucesso!")
+    input("Pressione ENTER para voltar o menu principal...")
+    main()
 
 def listar_restaurantes() -> None:
-    print("Listando restaurantes... (placeholder)")
-    pausar()
+    print("Listando restaurantes...")
+    if not restaurantes:
+        print("Nenhum restaurante cadastrado.")
+    else:
+        for idx, restaurante in enumerate(restaurantes, start=1):
+            print(f"{idx}. {restaurante}")
+    input("\nPressione ENTER para voltar o menu principal...")
+    main()
 
 def ativar_restaurante() -> None:
-    print("Ativando restaurante... (placeholder)")
+    print("Ativando restaurante...")
     pausar()
 
 def main() -> None:

@@ -1,13 +1,43 @@
-# Mini Lake First — Estudos (Data Engineer + AI Engineer)
+# 🧠 estudos-python-de-ml
 
-Este repositório segue a trilha **Mini Lake First**: Python profissional + projeto central **Mini Lake (Bronze/Silver/Gold)**,
-com resiliência (logs, retries, estado incremental, idempotência) e entregáveis semanais.
+> Meu repositório “caderno de guerra” de estudos: **Data Engineering + Machine Learning**, tudo na prática, com organização, desafios e projetos reais.
 
-## Estrutura
-- `projects/mini_lake/` — projeto principal (Bronze/Silver/Gold)
-- `tracks/01_foundations/` — fundamentos (Python, CSV/JSON, Git, debugging)
-- `tracks/02_sql/` — SQL (modelagem + consultas)
-- `tracks/07_machine_learning/` — ML/GenAI (quando chegar a fase)
+🎯 **Objetivo:** evoluir do Python “pra dados” até fundamentos sólidos de ML/Engenharia de ML, criando um histórico consistente de aprendizado.
 
-## Como rodar (Mini Lake)
-Veja `projects/mini_lake/README.md`.
+---
+
+## 🚀 O que você vai encontrar aqui
+
+- **Trilha de Data Engineering**
+  - Python fundamentals aplicados (funções, erros, estruturas, desafios)
+  - Pandas (manipulação, limpeza, análise)
+  - SQL (consultas, modelagem e prática)
+  - Spark/Databricks (quando eu entrar nessa fase)
+  - Projetos de dados (ex.: analytics, pipelines, etc.)
+
+- **Trilha de Machine Learning**
+  - Fundamentos (estatística básica, métricas, validação)
+  - scikit-learn (pipelines, modelos clássicos, avaliação)
+  - Projetos de ML (começando simples e subindo a régua)
+
+---
+
+## 🧭 Estrutura do repositório
+
+```bash
+estudos-python-de-ml/
+├── data_engineering/
+│   ├── notebooks/
+│   ├── pandas/
+│   ├── projects/
+│   ├── python_fundamentos/
+│     └── alura/
+│   ├──ex_001_csv_basico
+│      └── data/
+│   ├── spark_databricks/
+│   ├── sql/
+├── machine_learning/
+│   ├── fundamentos/
+│   ├── sklearn/
+│   └── projects/
+└── shared/

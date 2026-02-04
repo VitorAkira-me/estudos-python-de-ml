@@ -29,3 +29,4 @@ Thumbs.db
 # Data outputs
 projects/mini_lake/data/**
 !projects/mini_lake/data/.gitkeep
+data_engineering/python_fundamentos/alura/machine_learning/dados/creditcard.csv

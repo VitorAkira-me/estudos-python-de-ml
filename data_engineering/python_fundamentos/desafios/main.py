@@ -1,4 +1,4 @@
-from utils import format_user, math_operations, welcome_message
+from data_engineering.python_fundamentos.desafios.utils import format_user, math_operations, welcome_message
 #from utils import format_user, sum, welcome
 #import utils as u
 

@@ -82,7 +82,7 @@
 #1) Vai aparecer "23"
 #2) print("Idade encontrada:", user)
 
-from utils import filter_even,safe_divide
+from data_engineering.python_fundamentos.desafios.utils import filter_even,safe_divide
 
 numbers = [1, 2, 3, 4, 5, 6, 7, 8]
 even_nums = filter_even(numbers)

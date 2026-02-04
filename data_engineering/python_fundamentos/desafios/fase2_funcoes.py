@@ -1,4 +1,4 @@
-from stats_utils import stats, describe_user
+from data_engineering.python_fundamentos.desafios.stats_utils import stats, describe_user
 
 #resultado = stats(10, 5, 2, 8)
 #print(resultado)

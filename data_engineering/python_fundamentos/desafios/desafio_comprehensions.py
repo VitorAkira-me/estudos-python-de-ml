@@ -1,4 +1,4 @@
-from utils import filter_even, safe_divide
+from data_engineering.python_fundamentos.desafios.utils import filter_even, safe_divide
 
 #Challenge 1
 numbers = [1,2,3,4,5,6,7,8]

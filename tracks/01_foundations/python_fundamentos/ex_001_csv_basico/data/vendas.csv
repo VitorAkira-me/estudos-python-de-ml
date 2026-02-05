@@ -1,8 +1,0 @@
-id,data,produto,quantidade,preco,cliente
-1,2026-01-10,Mouse,2,59.90,Ana
-2,2026-01-10,Teclado,1,199.90,Bruno
-3,2026-01-11,Mouse,1,59.90,Ana
-4,2026-01-11,Monitor,1,1299.00,Carlos
-5,2026-01-11,Teclado,2,199.90,ana
-6,2026-01-12,Mouse,,59.90,Bruno
-7,2026-01-12,Headset,1,,- 

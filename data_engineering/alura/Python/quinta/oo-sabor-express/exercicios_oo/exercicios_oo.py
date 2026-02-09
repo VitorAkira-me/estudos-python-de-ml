@@ -42,6 +42,7 @@ class Musica:
 musica1 = Musica()
 musica1.nome = 'Bohemian Rhapsody'
 musica1.duracao = 355
+musica1.artista = 'teste'
 
 print(f'Música: {musica1.nome} - Banda: {musica1.artista} - {musica1.duracao} segundos')
 

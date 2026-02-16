@@ -19,44 +19,26 @@
 #print(vars(restaurante_praca))
 #---------------------MEU JEITO------------------------#
 
-class restaurante:
-    categoria = "Genérica"
+class Restaurante:
+    restaurantes = []
     
-    def __init__(self, nome: str, categoria: str, ativo: bool = False) :
+    def __init__(self, nome: str, categoria: str, ativo: bool = False): #Métodos especiais ->  também conhecidos como "dunder methods" (métodos com duplo sublinhado)
         self.nome = nome
         self.categoria = categoria
         self.ativo = ativo
+        Restaurante.restaurantes.append(self)
+
+    def __str__(self): #Utilizado para deixar legivel e visual o retorno
+        return f'{self.nome} | {self.categoria} | {self.ativo}'
+    
+    def listar_restaurantes():
+        for restaurante in Restaurante.restaurantes:
+            print(f'{restaurante.nome} | {restaurante.categoria} | {restaurante.ativo}')
 
     def status(self) -> str:
         return "ativo" if self.ativo else "inativo"
 
-restaurante_praca = restaurante('Praça', 'Brasileira', False)
+restaurante_praca = Restaurante('Praça', 'Gourmet', False)
+restaurante_pizza = Restaurante('Pizza Expressa', 'Italiana', True)
 
-#1
-restaurante_praca.categoria = "Italiana"
-print(vars(restaurante_praca))
-
-#2
-print(restaurante_praca.nome)
-
-#3
-print(f"O Restaurante está {restaurante_praca.status()}")
-
-#4
-categoria = restaurante.categoria
-print("Categoria (classe):",categoria)
-
-#5
-restaurante_praca.nome = "Bistro"
-
-#6
-restaurante_pizza = restaurante("Pizza Place", "Fast Food")
-
-#7
-print(restaurante_pizza.categoria == "Fast Food")
-
-#8
-restaurante_pizza.ativo = True
-
-#9
-print(f"{restaurante_praca.nome} - {restaurante_praca.categoria}")
+Restaurante.listar_restaurantes()

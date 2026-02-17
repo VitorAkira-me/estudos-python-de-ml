@@ -202,4 +202,51 @@ Os Sistemas de Gerenciamento de Banco de Dados (SGBD)
 
 Já MySQL e PostgreSQL são bancos cliente-servidor, projetados para múltiplos usuários, alta concorrência e grandes volumes de dados.
 
+---------------------------------------------------------------
+1.	Qual a diferença entre SELECT DISTINCT e criar uma tabela?
+R: SELECT DISTINCT é consulta: retorna valores únicos de uma coluna/resultado, sem mudar o banco. CREATE TABLE é DDL: cria um objeto permanente no banco com colunas, tipos e restrições.
 
+2.	Por que PK não pode ser repetida nem nula? O que isso evita na prática?
+R: A PK garante unicidade e identificação estável de cada linha. Evita registros duplicados/ambíguos e permite relacionamentos confiáveis (FK). “Não nula” garante que toda linha seja endereçável.
+
+3.	Em quais casos Nome_Cliente não serve como PK? Me dá 2 exemplos reais.
+R: Nomes duplicados (duas “Maria Silva”).
+Nome pode mudar (casamento/retificação) → PK tem que ser estável.
+E sim: CPF pode falhar em cenários como estrangeiros, menores sem doc, cadastro incompleto, etc.
+
+4.	ALTER TABLE é sempre “seguro”? Que riscos ele traz em produção?
+R: Não. Pode bloquear tabela, causar downtime, quebrar queries/ETLs, invalidar índices, exigir backfill/migração e gerar incompatibilidade com aplicações. Em produção: versionamento de schema + migrações controladas.
+
+5.	Por que uma FK normalmente referencia uma PK (ou UNIQUE)?
+R: Porque a FK precisa apontar para um valor garantidamente único, senão a relação fica ambígua (um mesmo valor apontaria para várias linhas). PK/UNIQUE garante integridade referencial.
+
+6.	O que acontece se eu tentar inserir um produto com Categoria = 999 e essa categoria não existe?
+R: Se FK estiver ativa, o insert falha com erro de integridade (violação de foreign key).
+Se a FK não existir (ou estiver desabilitada), o banco aceita e você cria um dado órfão (inconsistente), quebrando relatórios e joins.
+Dica prática (SQLite): PRAGMA foreign_keys = ON;
+
+7.	DECIMAL(10,2): o que significam 10 e 2? Quando isso é melhor que FLOAT?
+R: 10 = precisão total (quantidade máxima de dígitos no número).
+2 = escala (casas decimais).
+DECIMAL é melhor que FLOAT em valores financeiros porque evita erros de arredondamento binário (FLOAT é aproximação).
+
+8.	Qual diferença prática entre DROP TABLE e DELETE FROM tabela?
+R: DROP TABLE remove a tabela inteira (estrutura + dados).
+DELETE FROM tabela remove linhas (dados), mantendo a estrutura.
+(Para remover coluna é ALTER TABLE ... DROP COLUMN — quando suportado.)
+
+---------------------------------------------------------------
+Principais Diferenças e Comandos:
+DDL (Estrutura):
+CREATE: Cria novos objetos, como bancos de dados ou tabelas.
+ALTER: Modifica a estrutura de um objeto existente (ex: adicionar uma coluna).
+DROP: Exclui objetos do banco de dados.
+TRUNCATE: Remove todos os registros de uma tabela, mas mantém a estrutura.
+Características: As alterações são geralmente irreversíveis (auto-commit).
+
+DML (Dados):
+SELECT: Recupera dados de tabelas.
+INSERT: Adiciona novos dados.
+UPDATE: Atualiza dados existentes.
+DELETE: Remove linhas de uma tabela.
+Características: Permite reverter as alterações (rollback) antes de confirma

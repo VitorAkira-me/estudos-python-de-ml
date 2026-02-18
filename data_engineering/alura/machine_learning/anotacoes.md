@@ -94,8 +94,398 @@ Depois precisamos somar todos os valores para chegar no valor de RSS da arvore.
 
 Final dos resultados:
 ![alt text](image-17.png)
+----------------------------------------------------------------------
+1. temos que dividir os dados de treino (construir o modelo) e dados de teste (testar o modelo)
+2. Como vimos que esta desbalanceados vamos utilizar um método do Scikit Learn, que é chamado de Stratified Shuffle Split.
+
+3. em vez de tirar um conjunto inteiro de dados, desse conjunto pegamos 10% pra teste e 90% pra treino.
+4. E oque o metodo faz é separar pela porcentagem 10% de teste e 90% de treino apenas do numero de fraudes, e faremos a mesma coisa para as transações normais 10% de teste e 90% de treino
+
+5. Modelos preditivos servem para saber o que pode acontecer no futuro com base nos dados do passado, teste e treino servem para evitar overfitting, treino = O modelo aprende padrões e teste = modelo prova que aprendeu. Sem teste você não sabe se o modelo generaliza.
+6. Stratified mantém a proporção de classes, pois cria aleatoriedade mantendo a proporção. Porque se quase nenhuma é fraude tanto com treino quanto com teste, o teste seria zero fraude.
+
+É descobrir padrões como:
+Se V17 <= -2
+E V14 <= -3
+Então alta probabilidade de fraude
+
+Isso é regra de decisão.
+
+Isso é aprendizado supervisionado.
+
+7. O modelo pode parecer perfeito, pode ter uma acurracy altissima, porem nao significa que aprendeu os padrões REAIS, significa que apenas memorizou os dados = OVERFITTING
+Ele aprende o passado perfeitamente, porem quando aparece uma transação nova, ele falha.
+É como estudar exatamente as perguntas da prova
+e depois pegar uma prova diferente.
+
+8. Quando a árvore cresce sem limite em dados desbalanceados, ela tende a memorizar padrões raros da classe minoritária, criando regras muito específicas e levando ao overfitting, o que compromete a generalização para novos dados.
+
+Árvore de decisão cresce até:
+separar completamente os dados
+ou até não conseguir mais dividir
+
+Em dados extremamente desbalanceados:
+Ela pode criar regras muito específicas como:
+
+Se V17 <= -1.732
+E V10 <= -5.123
+E Time <= 123456.78
+E Amount <= 345.12
+E ...
+
+Ela vai criando divisões cada vez mais específicas.
+Isso pode resultar em:
+
+Gini = 0 em quase todos os nós finais.
+
+Treino → perfeito
+Teste → pode cair bastante
+-------------------------------------------------------------------------
+🏗 Arquitetura completa (do jeito certo)
+1️⃣ Dados chegam
+
+Transações chegam via:
+
+API
+
+Kafka
+
+Banco relacional
+
+Streaming
 
 
+2️⃣ Data Lake (Bronze)
+
+Dados crus, exatamente como chegaram.
+
+Sem transformação.
+
+Só ingestão.
+
+3️⃣ Silver (limpeza + padronização)
+
+Aqui acontece:
+
+tratamento de nulos
+
+normalização
+
+padronização de tipos
+
+remoção de inconsistências
+
+Agora os dados estão confiáveis.
+
+4️⃣ Feature Engineering (a parte que você perguntou)
+
+Essa é a parte MAIS importante para ML.
+
+Feature engineering = criar novas variáveis úteis para o modelo.
+
+Exemplos reais de fraude:
+
+Quantidade de transações do cliente nas últimas 2 horas
+
+Valor médio das últimas 5 transações
+
+Desvio padrão do valor
+
+Distância geográfica entre duas compras
+
+Frequência de compra noturna
+
+Isso não vem pronto no dataset.
+
+Você cria.
+
+E muitas vezes isso vale mais que o modelo.
+
+📌 80% do ML é feature engineering.
 
 
+5️⃣ Aplicação do modelo
 
+Você pega as features prontas e roda:
+
+modelo.predict()
+
+ou
+
+modelo.predict_proba()
+
+Agora você tem:
+
+Probabilidade de fraude = 0.87
+
+6️⃣ Tomada de decisão automática
+
+Se probabilidade > 0.7:
+
+bloqueia
+
+pede validação
+
+marca como suspeita
+
+7️⃣ Log da decisão
+
+Salva:
+
+features usadas
+
+probabilidade
+
+decisão tomada
+
+Isso é importante para auditoria.
+
+8️⃣ Power BI
+
+Agora o BI mostra:
+
+Fraudes detectadas hoje
+
+Probabilidade média
+
+Falsos positivos
+
+Economia gerada
+
+Agora BI vira monitoramento do modelo.
+-------------------------------------------------------
+Memorizar → aprende regras extremamente específicas dos dados vistos.
+
+Aprender padrão → aprende estrutura estatística que se mantém em novos dados.
+
+Se não houver fraude no teste, métricas como Recall e Precision perdem significado.
+
+10% de teste e 90% de treino - Teste mede generalização
+---------------------------------------------------------
+1. treinou demais / armazenou padrões
+
+Isso é exatamente o ponto:
+
+👉 GINI baixo só prova que o modelo organizou bem o TREINO, não que ele entende o mundo real.
+
+Resumo mental rápido:
+
+treino → aprender regras
+
+teste → provar que não decorou
+
+Instável =
+👉 pequenas mudanças nos dados causam grandes mudanças nas métricas.
+
+E isso acontece quando:
+
+✅ existem pouquíssimos exemplos da classe importante.
+
+👉 Quanto MENOS exemplos da classe rara, MAIS instáveis são as métricas.
+
+👉 Quanto MAIS exemplos, MAIS confiável é a avaliação.
+
+
+Quando o teste possui apenas uma fraude, as métricas ficam instáveis, pois um único erro ou acerto altera drasticamente o resultado, tornando a avaliação do modelo pouco confiável.
+--------------------------------------------
+Dataset desbalanceado NÃO é o problema principal.
+O verdadeiro problema é:
+
+👉 avaliar o modelo com poucos exemplos da classe crítica.
+
+Por isso existem técnicas como:
+
+Stratified Split ✅ (você já viu)
+
+Cross Validation
+
+Oversampling (SMOTE)
+
+Undersampling
+
+Ajuste de threshold
+-------------------------------------------
+Accuracy alta não quer dizer que o nó foi puro
+
+Cuidado aqui.
+
+Accuracy não mede pureza de nó.
+Ela mede:
+
+(acertos totais) / (total de previsões)
+----------------------------------
+Realidade	| Modelo disse	| Nome
+Fraude	    | Fraude	    | ✅ True Positive (TP)
+Não fraude	| Não fraude	| ✅ True Negative (TN)
+Não fraude	| Fraude	    | ⚠️ False Positive (FP)
+Fraude      | Não fraude	| 🚨 False Negative (FN)
+
+
+o que REALMENTE era fraude → y_test
+o que o modelo ACHOU → y_pred
+
+Confusion Matrix (A BASE DE TUDO)
+Quantas vezes o modelo acertou e errou?
+[[28419   13]
+ [   13   36]]
+
+1. Primeira linha (compras normais)
+28419 vezes: era normal - modelo disse normal - ✅ ACERTO
+13 vezes: era normal - modelo disse fraude - ❌ bloqueou cliente inocente
+
+2. Segunda linha (fraudes)
+13 vezes: era fraude - modelo disse normal - ❌ fraude passou
+36 vezes: era fraude - modelo disse fraude - ✅ salvou dinheiro
+
+| Realidade | Modelo | Resultado           |
+| --------- | ------ | ------------------- |
+| Normal    | Normal | ✅                   |
+| Normal    | Fraude | ❌ cliente bloqueado |
+| Fraude    | Normal | ❌ prejuízo          |
+| Fraude    | Fraude | ✅ proteção          |
+
+
+2️⃣ Accuracy (Acurácia)
+Conta TODOS os acertos:
+28419 + 36
+Divide pelo total.
+
+Problema:
+Como quase tudo é normal,
+acertar normal já dá nota alta.
+Por isso ela engana em fraude.
+
+1) Tradução humana
+Accuracy = nota geral da prova.
+Mas a prova tem 99 perguntas fáceis e 1 difícil.
+
+3️⃣ Precision (Precisão)
+Pergunta:
+Quando o modelo GRITOU “FRAUDE”, ele estava certo?
+
+Olhamos só para os casos onde ele acusou fraude.
+Entre esses:
+quantos eram fraude de verdade?
+Tradução humana
+Precision mede:
+
+👉 quantos clientes inocentes você bloqueou sem querer.
+
+Precision alta =
+modelo só acusa quando tem certeza.
+
+3. Quando a Precision fica baixa?
+
+Quando o modelo vira paranoico:
+
+🚨 FRAUDE
+🚨 FRAUDE
+🚨 FRAUDE
+
+Ele pega fraude…
+mas também bloqueia muita compra normal.
+
+Resultado:
+
+Clientes irritados.
+----------------------------------
+4️⃣ Recall (Sensibilidade)
+Pergunta:
+Das fraudes que EXISTIAM, quantas eu consegui pegar?
+
+Aqui olhamos todas as fraudes reais.
+E vemos quantas o modelo capturou.
+
+Tradução humana
+Recall mede:
+
+👉 quanto dinheiro você conseguiu salvar.
+
+Recall alto =
+poucas fraudes escapam.
+
+4. Recall pergunta outra coisa:
+
+Das fraudes que EXISTIAM, quantas eu consegui pegar?
+
+Então:
+
+Precision olha para os ALARMES
+
+Recall olha para as FRAUDES REAIS
+--------------------------------
+🧩 RESUMO DEFINITIVO
+| Métrica          | Pergunta humana             |
+| ---------------- | --------------------------- |
+| Confusion Matrix | O que exatamente aconteceu? |
+| Accuracy         | Acertei no geral?           |
+| Precision        | Bloqueei só quem devia?     |
+| Recall           | Peguei as fraudes?          |
+------------------------------------------------------------------
+
+🎯 Visual definitivo (guarda isso)
+
+Imagine:
+Existiam 100 fraudes.
+
+O modelo marcou 200 compras como fraude.
+
+Entre essas 200:
+
+80 eram fraude
+
+120 eram normais
+
+Então:
+
+Precision:
+
+80 / 200 = 40%
+
+
+Recall:
+
+80 / 100 = 80%
+
+
+👉 Pegou bastante fraude (recall bom)
+👉 Mas acusou muita gente inocente (precision ruim)
+----------------------------------------------------------
+🧠 Consolidação final (guarda isso)
+
+Pensa sempre assim:
+
+🔵 Recall
+
+Olha para as fraudes reais.
+
+Pergunta:
+
+Eu consegui capturar elas?
+
+Fraude escapando → Recall baixo.
+
+🟢 Precision
+
+Olha para os alarmes do modelo.
+
+Pergunta:
+
+Quando eu acusei fraude, eu estava certo?
+
+Muitos clientes inocentes bloqueados → Precision baixa.
+
+🟡 Accuracy
+
+Olha tudo misturado.
+
+Pergunta:
+
+Acertei no geral?
+
+Em fraude, quase sempre engana.
+
+⚫ Confusion Matrix
+
+É o “placar completo”.
+Todas as métricas nascem dela.

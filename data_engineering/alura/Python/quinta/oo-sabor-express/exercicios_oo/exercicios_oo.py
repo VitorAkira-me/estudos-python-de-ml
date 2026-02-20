@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from decimal import Decimal
 #class musica:
 #    def __init__(self, nome: str, artista: str, duracao: int):
 #        self.nome = nome
@@ -138,65 +138,174 @@ from dataclasses import dataclass
 
 #Exercicio 2
 
-class Restaurante:
-    def __init__(self, nome: str, categoria:str, ativo: bool = False): #__init__ construtor
-        self.nome = nome
-        self.categoria = categoria
-        self.ativo = ativo
+#class Restaurante:
+#    def __init__(self, nome: str, categoria:str, ativo: bool = False): #__init__ construtor
+#        self.nome = nome
+#        self.categoria = categoria
+#        self.ativo = ativo
+#
+#    def __str__(self): #Foca na visualização
+#        return f'{self.nome} | {self.categoria} | {self.ativo}'
+#    
+#rest = Restaurante('Paris 6', 'Gourmet', True)
+#print(rest)
+#
+## 3) Modifique a classe Restaurante adicionando um construtor que aceita nome e categoria como parâmetros
+##    e inicia ativo como False por padrão. Crie uma instância utilizando o construtor.
+#
+#class Restaurante:
+#    def __init__(self, nome, categoria, capacidade=0, nota_avaliacao=0.0, ativo=False):
+#        self.nome = nome
+#        self.categoria = categoria
+#        self.capacidade = capacidade
+#        self.nota_avaliacao = nota_avaliacao
+#        self.ativo = ativo
+#
+## Instanciando um restaurante utilizando o construtor
+#novo_restaurante = Restaurante(nome='Santa Marmita', categoria='Fast Food')
+#
+#
+#
+## 4) Adicione um método especial __str__ à classe Restaurante para que, ao imprimir uma instância,
+##    seja exibida uma mensagem formatada com o nome e a categoria. Exiba essa mensagem para uma instância de restaurante.
+#
+#class Restaurante:
+#    def __init__(self, nome, categoria, capacidade=0, nota_avaliacao=0.0, ativo=False):
+#        self.nome = nome
+#        self.categoria = categoria
+#        self.capacidade = capacidade
+#        self.nota_avaliacao = nota_avaliacao
+#        self.ativo = ativo
+#
+#    def __str__(self):
+#        return f'{self.nome} | {self.categoria}'
+#
+## Exibindo uma instância do restaurante formatada
+#restaurante_formatado = Restaurante(nome='Bom Sabor', categoria='Tradicional')
+#print(restaurante_formatado)
+#
+#
+#
+## 5) Crie uma classe chamada Cliente e pense em 4 atributos.
+##    Em seguida, instancie 3 objetos desta classe e atribua valores aos seus atributos através de um método construtor.
+#
+#class Cliente:
+#    def __init__(self, nome, idade, email, telefone):
+#        self.nome = nome
+#        self.idade = idade
+#        self.email = email
+#        self.telefone = telefone
+#
+## Instanciando três objetos da classe Cliente e atribuindo valores aos seus atributos através do construtor
+#cliente1 = Cliente(nome='Alice', idade=25, email='alice@gmail.com', telefone='123-456-7890')
+#cliente2 = Cliente(nome='Bob', idade=30, email='bob@gmail.com', telefone='987-654-3210')
+#cliente3 = Cliente(nome='Charlie', idade=22, email='charlie@gmail.com', telefone='555-123-4567')
 
-    def __str__(self): #Foca na visualização
-        return f'{self.nome} | {self.categoria} | {self.ativo}'
-    
-rest = Restaurante('Paris 6', 'Gourmet', True)
-print(rest)
+#-------------------------------------################------------------------------------------#
+#Desafio 03.
+#Agora é sua vez! Crie uma nova classe chamada Pessoa com atributos como nome, idade e profissão. 
+#Adicione um método especial __str__ para imprimir uma representação em string da pessoa. 
+#Implemente também um método de instância chamado aniversario que aumenta a idade da pessoa em um ano. 
+#Por fim, adicione uma propriedade chamada saudacao que retorna uma mensagem de saudação personalizada com base na profissão da pessoa.
 
-# 3) Modifique a classe Restaurante adicionando um construtor que aceita nome e categoria como parâmetros
-#    e inicia ativo como False por padrão. Crie uma instância utilizando o construtor.
+#class Pessoa:
+#
+#    def __init__(self, nome, idade, profissao):
+#        self.nome = nome
+#        self.idade = int(idade)
+#        self.profissao = profissao
+#
+#    def __str__(self):
+#        return f'{self.nome} | {self.idade} | {self.profissao}'
+#
+#    def __repr__(self):
+#        return f"Pessoa(nome='{self.nome}', idade={self.idade}, profissao='{self.profissao}')"
+#
+#    def aniversario(self):
+#        self.idade += 1
+#
+#    @property
+#    def saudacao(self):
+#        return f'Olá {self.nome}, que legal que você trabalha com {self.profissao}!'
+#
+#pessoa_1 = Pessoa('Akira', 24, 'Dados')
+#pessoa_1.aniversario()
+#print(pessoa_1.saudacao)
+#print(pessoa_1)
 
-class Restaurante:
-    def __init__(self, nome, categoria, capacidade=0, nota_avaliacao=0.0, ativo=False):
-        self.nome = nome
-        self.categoria = categoria
-        self.capacidade = capacidade
-        self.nota_avaliacao = nota_avaliacao
-        self.ativo = ativo
+#--------
+#Exercicio Hora da prática do módulo 03.Property e métodos de classe
 
-# Instanciando um restaurante utilizando o construtor
-novo_restaurante = Restaurante(nome='Santa Marmita', categoria='Fast Food')
-
-
-
-# 4) Adicione um método especial __str__ à classe Restaurante para que, ao imprimir uma instância,
-#    seja exibida uma mensagem formatada com o nome e a categoria. Exiba essa mensagem para uma instância de restaurante.
-
-class Restaurante:
-    def __init__(self, nome, categoria, capacidade=0, nota_avaliacao=0.0, ativo=False):
-        self.nome = nome
-        self.categoria = categoria
-        self.capacidade = capacidade
-        self.nota_avaliacao = nota_avaliacao
-        self.ativo = ativo
+class ContaBancaria:
+    def __init__(self,titular, saldo):
+        self._titular = titular
+        self._saldo = saldo
+        self._ativo = False
 
     def __str__(self):
-        return f'{self.nome} | {self.categoria}'
+        return f'{self._titular} | {self._saldo:.3f} | {self.ativo}'
+    
+    @property
+    def ativo(self):
+        # Retorna o texto baseado no valor booleano
+        return "Ativado" if self._ativo else "Desativado"
 
-# Exibindo uma instância do restaurante formatada
-restaurante_formatado = Restaurante(nome='Bom Sabor', categoria='Tradicional')
-print(restaurante_formatado)
+    def ativar_conta(self):
+        # O 'not' inverte o valor atual: se era False, vira True
+        self._ativo = not self._ativo
 
+usuario_1 = ContaBancaria('Marcia', 4.500)
+usuario_1.ativar_conta()
+usuario_2 = ContaBancaria('Jorge', 2.800)
+print(usuario_1)
+print(usuario_2)
 
+class ContaBancariaPythonica:
+    def __init__(self, titular, saldo):
+        self._titular = titular
+        self._saldo = saldo
+        self._ativo = False
 
-# 5) Crie uma classe chamada Cliente e pense em 4 atributos.
-#    Em seguida, instancie 3 objetos desta classe e atribua valores aos seus atributos através de um método construtor.
+    @property
+    def titular(self):
+        return self._titular
 
-class Cliente:
-    def __init__(self, nome, idade, email, telefone):
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @property
+    def ativo(self):
+        return self._ativo
+    
+    def ativar_conta(self):
+        self._ativo = True
+
+conta4 = ContaBancariaPythonica("Fernanda", 1500)
+print(f"Titular da conta 4: {conta4.titular}")
+
+# 6) Crie uma classe chamada `ClienteBanco` com um construtor que aceita 5 atributos. Instancie 3 objetos desta classe e atribua valores aos seus atributos através do método construtor.
+class ClienteBanco:
+    def __init__(self, nome, idade, endereco, cpf, profissao):
         self.nome = nome
         self.idade = idade
-        self.email = email
-        self.telefone = telefone
+        self.endereco = endereco
+        self.cpf = cpf
+        self.profissao = profissao
 
-# Instanciando três objetos da classe Cliente e atribuindo valores aos seus atributos através do construtor
-cliente1 = Cliente(nome='Alice', idade=25, email='alice@gmail.com', telefone='123-456-7890')
-cliente2 = Cliente(nome='Bob', idade=30, email='bob@gmail.com', telefone='987-654-3210')
-cliente3 = Cliente(nome='Charlie', idade=22, email='charlie@gmail.com', telefone='555-123-4567')
+cliente1 = ClienteBanco("Ana", 30, "Rua A", "123.456.789-01", "Backend")
+cliente2 = ClienteBanco("Luiza", 25, "Rua B", "987.654.321-01", "Estudante")
+cliente3 = ClienteBanco("Vinny Neves", 40, "Rua C", "111.222.333-44", "Frontend")
+
+# 7) Crie um método de classe para a conta `ClienteBanco`.
+class ClienteBanco:
+    # ... (outros métodos e atributos)
+
+    @classmethod
+    def criar_conta(cls, titular, saldo_inicial):
+        conta = ContaBancariaPythonica(titular, saldo_inicial)
+        return conta
+
+# Exemplo de uso do método de classe
+conta_cliente1 = ClienteBanco.criar_conta("Ana", 2000)
+print(f"Conta de {conta_cliente1.titular} criada com saldo inicial de R${conta_cliente1.saldo}")

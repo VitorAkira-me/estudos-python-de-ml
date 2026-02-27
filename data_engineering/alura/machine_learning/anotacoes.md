@@ -489,3 +489,148 @@ Em fraude, quase sempre engana.
 
 É o “placar completo”.
 Todas as métricas nascem dela.
+----------------------------------------------------------
+
+2. A grande ideia: Ensemble Learning
+
+Aqui vem o pulo do gato.
+
+Em vez de confiar em UMA árvore, fazemos:
+
+várias árvores pequenas trabalhando juntas.
+
+Pensa assim:
+
+👤 1 especialista → pode errar
+👥 100 especialistas → decisão mais confiável
+
+Isso é Ensemble Learning.
+---
+3. Bagging (Bootstrapping + Aggregating)
+
+Agora entra o conceito mais importante da aula.
+
+✅ Bootstrapping (amostragem)
+
+O algoritmo pega o dataset e cria vários subconjuntos aleatórios:
+
+Dataset original:
+1 2 3 4 5 6 7 8 9 10 ...
+
+Amostra A → [1,12,17,9,14]
+Amostra B → [1,3,11,4,5]
+Amostra C → [3,7,16,17,20]
+
+Cada amostra cria uma árvore diferente.
+
+👉 Cada árvore aprende uma visão diferente do problema.
+---
+Aggregating (agregação)
+
+Depois todas votam:
+
+Árvore 1 → FRAUDE
+Árvore 2 → NÃO FRAUDE
+Árvore 3 → FRAUDE
+
+Resultado final:
+
+👉 maioria vence = FRAUDE
+
+Isso reduz muito erro individual.
+---
+4. Random Forest (a floresta)
+
+Random Forest = Bagging + aleatoriedade extra.
+
+Cada árvore:
+
+✅ usa transações aleatórias
+✅ usa atributos aleatórios (país, valor, média…)
+
+Então nenhuma árvore fica igual à outra.
+
+Visualmente:
+        🌳
+     🌳 🌳 🌳
+   🌳 🌳 🌳 🌳
+
+Cada árvore é fraca sozinha.
+
+Mas juntas → modelo forte.
+---
+5. O que são Out-of-Bag (OOB)?
+
+Isso é MUITO importante.
+
+Quando uma árvore é criada:
+
+ela usa só parte dos dados
+
+os dados não usados viram teste automático
+
+Exemplo:
+
+Árvore A1 treinou com:
+[1,2]
+
+Então valida com:
+[3,4,5]
+
+Isso chama:
+
+👉 Out of Bag samples
+
+É como ter um mini validation set grátis.
+---
+6. O voto final (parte da tabela)
+
+Na aula:
+
+Transação	A1	A2	Resultado
+5	SIM	SIM	✅ SIM
+
+As árvores votam.
+
+Random Forest decide pela maioria.
+---
+7. Por que Random Forest melhora métricas?
+
+Porque ele:
+
+✅ reduz overfitting
+✅ reduz variância
+✅ evita decisões extremas de uma única árvore
+
+Resultado da aula:
+
+Modelo	Recall
+Árvore simples	0.73
+Random Forest	0.75
+
+Pequena melhora, mas muito mais robusto.
+---
+8. A árvore tenta achar:
+
+"qual regra perfeita?"
+
+Random Forest pensa:
+
+"qual decisão é consistente entre várias visões?"
+
+Isso é exatamente o que modelos reais fazem.
+---
+Decision Tree
+→ aprende regras
+
+Overfit
+→ árvore profunda demais
+
+Bagging
+→ várias árvores com amostras diferentes
+
+Random Forest
+→ várias árvores + atributos aleatórios
+
+Resultado
+→ votação final mais estável

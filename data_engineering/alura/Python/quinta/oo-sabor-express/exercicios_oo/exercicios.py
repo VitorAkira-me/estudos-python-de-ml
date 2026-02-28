@@ -236,76 +236,111 @@ from decimal import Decimal
 #--------
 #Exercicio Hora da prática do módulo 03.Property e métodos de classe
 
-class ContaBancaria:
-    def __init__(self,titular, saldo):
-        self._titular = titular
-        self._saldo = saldo
-        self._ativo = False
+#class ContaBancaria:
+#    def __init__(self,titular, saldo):
+#        self._titular = titular
+#        self._saldo = saldo
+#        self._ativo = False
+#
+#    def __str__(self):
+#        return f'{self._titular} | {self._saldo:.3f} | {self.ativo}'
+#    
+#    @property
+#    def ativo(self):
+#        # Retorna o texto baseado no valor booleano
+#        return "Ativado" if self._ativo else "Desativado"
+#
+#    def ativar_conta(self):
+#        # O 'not' inverte o valor atual: se era False, vira True
+#        self._ativo = not self._ativo
+#
+#usuario_1 = ContaBancaria('Marcia', 4.500)
+#usuario_1.ativar_conta()
+#usuario_2 = ContaBancaria('Jorge', 2.800)
+#print(usuario_1)
+#print(usuario_2)
+#
+#class ContaBancariaPythonica:
+#    def __init__(self, titular, saldo):
+#        self._titular = titular
+#        self._saldo = saldo
+#        self._ativo = False
+#
+#    @property
+#    def titular(self):
+#        return self._titular
+#
+#    @property
+#    def saldo(self):
+#        return self._saldo
+#
+#    @property
+#    def ativo(self):
+#        return self._ativo
+#    
+#    def ativar_conta(self):
+#        self._ativo = True
+#
+#conta4 = ContaBancariaPythonica("Fernanda", 1500)
+#print(f"Titular da conta 4: {conta4.titular}")
+#
+## 6) Crie uma classe chamada `ClienteBanco` com um construtor que aceita 5 atributos. Instancie 3 objetos desta classe e atribua valores aos seus atributos através do método construtor.
+#class ClienteBanco:
+#    def __init__(self, nome, idade, endereco, cpf, profissao):
+#        self.nome = nome
+#        self.idade = idade
+#        self.endereco = endereco
+#        self.cpf = cpf
+#        self.profissao = profissao
+#
+#cliente1 = ClienteBanco("Ana", 30, "Rua A", "123.456.789-01", "Backend")
+#cliente2 = ClienteBanco("Luiza", 25, "Rua B", "987.654.321-01", "Estudante")
+#cliente3 = ClienteBanco("Vinny Neves", 40, "Rua C", "111.222.333-44", "Frontend")
+#
+## 7) Crie um método de classe para a conta `ClienteBanco`.
+#class ClienteBanco:
+#    # ... (outros métodos e atributos)
+#
+#    @classmethod
+#    def criar_conta(cls, titular, saldo_inicial):
+#        conta = ContaBancariaPythonica(titular, saldo_inicial)
+#        return conta
+#
+## Exemplo de uso do método de classe
+#conta_cliente1 = ClienteBanco.criar_conta("Ana", 2000)
+#print(f"Conta de {conta_cliente1.titular} criada com saldo inicial de R${conta_cliente1.saldo}")
+
+#-----------------###################--------------------------#
+
+class Livro:
+    biblioteca = []
+    def __init__(self, titulo, autor, ano_publicacao):
+        self._titulo = titulo
+        self._autor = autor
+        self._ano_publicacao = ano_publicacao
+        self._disponivel = True
+        Livro.biblioteca.append(self)
 
     def __str__(self):
-        return f'{self._titular} | {self._saldo:.3f} | {self.ativo}'
-    
-    @property
-    def ativo(self):
-        # Retorna o texto baseado no valor booleano
-        return "Ativado" if self._ativo else "Desativado"
-
-    def ativar_conta(self):
-        # O 'not' inverte o valor atual: se era False, vira True
-        self._ativo = not self._ativo
-
-usuario_1 = ContaBancaria('Marcia', 4.500)
-usuario_1.ativar_conta()
-usuario_2 = ContaBancaria('Jorge', 2.800)
-print(usuario_1)
-print(usuario_2)
-
-class ContaBancariaPythonica:
-    def __init__(self, titular, saldo):
-        self._titular = titular
-        self._saldo = saldo
-        self._ativo = False
-
-    @property
-    def titular(self):
-        return self._titular
-
-    @property
-    def saldo(self):
-        return self._saldo
-
-    @property
-    def ativo(self):
-        return self._ativo
-    
-    def ativar_conta(self):
-        self._ativo = True
-
-conta4 = ContaBancariaPythonica("Fernanda", 1500)
-print(f"Titular da conta 4: {conta4.titular}")
-
-# 6) Crie uma classe chamada `ClienteBanco` com um construtor que aceita 5 atributos. Instancie 3 objetos desta classe e atribua valores aos seus atributos através do método construtor.
-class ClienteBanco:
-    def __init__(self, nome, idade, endereco, cpf, profissao):
-        self.nome = nome
-        self.idade = idade
-        self.endereco = endereco
-        self.cpf = cpf
-        self.profissao = profissao
-
-cliente1 = ClienteBanco("Ana", 30, "Rua A", "123.456.789-01", "Backend")
-cliente2 = ClienteBanco("Luiza", 25, "Rua B", "987.654.321-01", "Estudante")
-cliente3 = ClienteBanco("Vinny Neves", 40, "Rua C", "111.222.333-44", "Frontend")
-
-# 7) Crie um método de classe para a conta `ClienteBanco`.
-class ClienteBanco:
-    # ... (outros métodos e atributos)
+        return f"Titulo do livro: {self._titulo} | Autor: {self._autor} | Ano publicado: {self._ano_publicacao} | Disponibilidade: {self.ativado}"
 
     @classmethod
-    def criar_conta(cls, titular, saldo_inicial):
-        conta = ContaBancariaPythonica(titular, saldo_inicial)
-        return conta
+    def lista_biblioteca(cls):
+        print(f"{'Titulo'.ljust(25)} | {'Autores'.ljust(25)} | {'Ano de publicação'.ljust(25)} | {'Disponibilidade'}")
+        for bibliotec in cls.biblioteca:
+            print(f"{bibliotec._titulo.ljust(25)} | {bibliotec._autor.ljust(25)} | {str(bibliotec._ano_publicacao).ljust(25)} | {bibliotec.ativado}")
 
-# Exemplo de uso do método de classe
-conta_cliente1 = ClienteBanco.criar_conta("Ana", 2000)
-print(f"Conta de {conta_cliente1.titular} criada com saldo inicial de R${conta_cliente1.saldo}")
+    @property
+    def ativado(self):
+        return 'Disponivel' if self._disponivel else 'Indisponivel'
+
+    def emprestar(self):
+        self._disponivel = not self._disponivel
+
+    @staticmethod
+    def verificar_disponibilidade(ano):
+        return Livro(ano)
+
+
+
+

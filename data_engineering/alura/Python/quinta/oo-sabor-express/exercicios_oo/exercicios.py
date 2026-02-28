@@ -339,7 +339,8 @@ class Livro:
 
     @staticmethod
     def verificar_disponibilidade(ano):
-        return Livro(ano)
+        livros_disponiveis = [livro for livro in Livro.livros if livro.ano_publicacao == ano and livro.disponivel]
+        return livros_disponiveis
 
 
 

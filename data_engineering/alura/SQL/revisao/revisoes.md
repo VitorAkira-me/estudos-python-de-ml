@@ -1,3 +1,8 @@
+Glossário SQL
+https://cdn3.gnarususercontent.com.br/2953-sqlite-conhecendo-instrucoes-sql/GLOSS%C3%81RIO%20SQL.pdf
+
+
+
 🧠 1️⃣ Revisão conceitual (quero ouvir de você)
 
 Responda com suas palavras, sem copiar definição:

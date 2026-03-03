@@ -288,4 +288,24 @@ VALUES (1,2023-08-01,'Pendente',150.00,5,2023-08-10),
 (70,2023-10-10,'Processando',150.00,3,2023-10-19);
 
 
+UPDATE tabelapedidos SET Status = 'Enviado' WHERE status = 'Processando';
+
+UPDATE tabelaclientes SET informacoes_de_contato = 'j.santos@email.com', endereco_cliente = 'Rua dos paralelepipedos, 30' WHERE id_cliente = 2;
+
+DELETE FROM tabelaforcenedores WHERE pais_de_origem = 'Turquia';
+
+DELETE FROM tabelaforcenedores WHERE id > 35;
+
+--CREATE TABLE Clientes (
+--    ID INT PRIMARY KEY,
+--    Nome VARCHAR(50)
+--);--
+--CREATE TABLE Pedidos (
+--    PedidoID INT PRIMARY KEY,
+--    ClienteID INT,
+--    Descricao VARCHAR(100),
+--    FOREIGN KEY (ClienteID) REFERENCES Clientes(ID) ON DELETE CASCADE
+--);
+
+
 

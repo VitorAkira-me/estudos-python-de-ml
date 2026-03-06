@@ -637,8 +637,6 @@ Resultado
 ----------------------------------------
 1️⃣ O que significa bagging
 
-Sua resposta está correta. Só vou deixar mais “redondinho”:
-
 Bagging é uma técnica de ensemble onde você treina vários modelos (ex.: várias árvores) em amostras diferentes do mesmo dataset e depois agrega as previsões (geralmente por voto).
 
 Ponto fino importante:
@@ -646,10 +644,6 @@ No bagging clássico, a aleatoriedade principal é nos dados (bootstrap).
 No Random Forest, além disso, tem aleatoriedade também nas features.
 --
 2️⃣ Por que Random Forest reduz overfitting
-
-Sua lógica está certinha.
-
-A explicação curta e precisa é:
 
 Uma árvore sozinha é instável: muda muito se mudar um pouco os dados.
 
@@ -660,8 +654,6 @@ Isso reduz a variância do modelo, então ele para de “decorar” detalhes do 
 Ou seja, ele melhora generalização porque dilui o overfit de uma árvore individual.
 --
 3️⃣ O que é Out Of Bag Error
-
-Aqui está o conceito com clareza:
 
 No Random Forest, cada árvore é treinada com uma amostra bootstrap.
 

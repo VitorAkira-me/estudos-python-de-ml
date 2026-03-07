@@ -683,3 +683,8 @@ A taxa de erro disso é o OOB error.
 
 Técnica Booting forma modelos complementares, AdaBoost corrige os erros do modelo anterior, modelos sequencias.
 
+Pontos importantes sobre a técnica de boosting e o algoritmo AdaBoost. De fato, o boosting é uma abordagem que combina múltiplos modelos fracos para formar um modelo forte, e o AdaBoost se destaca por ajustar os pesos das instâncias de treinamento, focando nos erros cometidos pelos modelos anteriores.
+
+Além disso, também vimos como utilizar o scikit-learn para implementar o AdaBoost, o que permite que você execute o algoritmo de forma prática e eficiente. É importante lembrar que, ao usar o scikit-learn, você pode facilmente avaliar o desempenho do modelo, utilizando métricas como acurácia, precisão e recall, o que é fundamental para entender a eficácia do seu classificador.
+
+Outra parte relevante da aula foi a comparação de classificações de algoritmos diferentes, que é essencial para escolher o modelo mais adequado para o seu problema específico. Essa comparação pode ser feita através de gráficos e tabelas que mostram o desempenho de cada algoritmo em relação aos dados.

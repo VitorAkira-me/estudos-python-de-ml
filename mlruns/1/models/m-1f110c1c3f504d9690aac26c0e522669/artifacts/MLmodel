@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/vitor.akira/Documents/estudos/estudos-python-de-ml/mlruns/1/models/m-1f110c1c3f504d9690aac26c0e522669/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.10.1
+model_id: m-1f110c1c3f504d9690aac26c0e522669
+model_size_bytes: 1181
+model_uuid: m-1f110c1c3f504d9690aac26c0e522669
+prompts: null
+run_id: 4c7c5af6a69046b7917fcbe073cfd85f
+utc_time_created: '2026-03-12 10:47:01.463701'

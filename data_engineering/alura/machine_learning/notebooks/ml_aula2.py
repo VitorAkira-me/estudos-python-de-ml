@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
 
 plt.style.use('seaborn-v0_8-darkgrid')
 
-path = "data_engineering/alura/machine_learning/data/heart_disease_uci.csv"
+path = "data_engineering/alura/machine_learning/dados/heart_disease_uci.csv"
 
 # Carregar dados
 df = pd.read_csv(path)
